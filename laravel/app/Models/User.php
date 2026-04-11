@@ -36,4 +36,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function run()
+{
+    User::factory(10)->create(); // tạo 10 user
+}
 }
