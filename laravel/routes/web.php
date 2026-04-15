@@ -16,6 +16,7 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
 
+
 // EDIT
 Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
 
@@ -34,3 +35,4 @@ Route::get('/', function () {
 // Điều hướng login
 Route::get('login', [UserController::class, 'login'])->name('login');
 Route::post('login', [UserController::class, 'authUser'])->name('user.authUser');
+
