@@ -11,13 +11,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 #[Fillable([
-     'name',
+    'name',
     'email',
     'password',
     'phone',
     'address',
     'avatar',
-    'role'])]
+    'role'
+])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -36,8 +37,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function run()
-{
-    User::factory(10)->create(); // tạo 10 user
-}
+    // public function run()
+    // {
+    //     User::factory(10)->create(); // tạo 10 user
+    // }
+   
 }

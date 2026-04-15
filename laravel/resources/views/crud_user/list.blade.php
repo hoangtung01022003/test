@@ -22,7 +22,26 @@
 
     <main class="container mt-5">
         <h2 class="text-center mb-4">Danh sách người dùng</h2>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <!-- thêm user-->
+        <a href="{{ route('users.create') }}" class="btn btn-success mb-3">
+            + Thêm User
+        </a>
+        <!-- thêm form search-->
+        <form method="GET" action="{{ route('users.index') }}" class="mb-3 d-flex">
+            <input type="text" name="search" class="form-control me-2" placeholder="Tìm theo tên hoặc email"
+                value="{{ $search }}">
 
+            <button class="btn btn-primary">Search</button>
+        </form>
         <table class="table table-bordered table-striped">
             <thead class="table-light text-center">
                 <tr>
@@ -33,68 +52,39 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td>UPVH</td>
-                    <td>ATJW@gmail.com</td>
-                    <td>
-                        <a href="#" class="btn btn-primary me-2">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                        <a href="#" class="btn btn-secondary">View</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">2</td>
-                    <td>IFUK</td>
-                    <td>KULB@gmail.com</td>
-                    <td>
-                        <a href="#" class="btn btn-primary me-2">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                        <a href="#" class="btn btn-secondary">View</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">3</td>
-                    <td>DZZQ</td>
-                    <td>ERNB@gmail.com</td>
-                    <td>
-                        <a href="#" class="btn btn-primary me-2">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                        <a href="#" class="btn btn-secondary">View</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">4</td>
-                    <td>NJYY</td>
-                    <td>ROIF@gmail.com</td>
-                    <td>
-                        <a href="#" class="btn btn-primary me-2">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                        <a href="#" class="btn btn-secondary">View</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">5</td>
-                    <td>YUMG</td>
-                    <td>KITN@gmail.com</td>
-                    <td>
-                        <a href="#" class="btn btn-primary me-2">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                        <a href="#" class="btn btn-secondary">View</a>
-                    </td>
-                </tr>
+                @foreach($users as $user)
+                    <tr>
+                        <td class="text-center">
+                            {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
+                        </td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>
+                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary btn-sm">View</a>
+
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+
+                            <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display:inline;"
+                                onsubmit="return confirm('Bạn có chắc muốn xoá không?')">
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
+
+        <!-- search user + phân trang  -->
+        <div class="d-flex justify-content-center mt-3">
+            {{ $users->appends(['search' => $search])->links() }}
+        </div>
+
+
     </main>
 
 
