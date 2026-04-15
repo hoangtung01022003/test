@@ -23,17 +23,25 @@
     <main class="container mt-5">
         <h2 class="text-center mb-4">Danh sách người dùng</h2>
         @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <!-- thêm user-->
         <a href="{{ route('users.create') }}" class="btn btn-success mb-3">
             + Thêm User
         </a>
+        <!-- thêm form search-->
+        <form method="GET" action="{{ route('users.index') }}" class="mb-3 d-flex">
+            <input type="text" name="search" class="form-control me-2" placeholder="Tìm theo tên hoặc email"
+                value="{{ $search }}">
+
+            <button class="btn btn-primary">Search</button>
+        </form>
         <table class="table table-bordered table-striped">
             <thead class="table-light text-center">
                 <tr>
@@ -46,7 +54,9 @@
             <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <td class="text-center">{{ $user->id }}</td>
+                        <td class="text-center">
+                            {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
+                        </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
@@ -68,9 +78,13 @@
             </tbody>
         </table>
 
+
+        <!-- search user + phân trang  -->
         <div class="d-flex justify-content-center mt-3">
-            {{ $users->links() }}
+            {{ $users->appends(['search' => $search])->links() }}
         </div>
+
+
     </main>
 
 
