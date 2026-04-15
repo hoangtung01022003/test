@@ -28,25 +28,33 @@
                         <h4>Cập nhật</h4>
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Nhập username">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
-                            </div>
-                            <div class="mb-3">
-                                <label for="confirm" class="form-label">Nhập mật khẩu mới</label>
-                                <input type="password" class="form-control" id="confirm"
-                                    placeholder="Nhập mật khẩu mới">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Nhập email mới">
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Cập nhật</button>
+                        @endif
+                        <form action="{{ route('users.update', $user->id) }}" method="POST">
+                            @csrf
+
+                            <input name="name" class="form-control mb-2" value="{{ $user->name }}" placeholder="Tên">
+
+                            <input name="email" class="form-control mb-2" value="{{ $user->email }}"
+                                placeholder="Email">
+
+                            <input type="password" name="password" class="form-control mb-2"
+                                placeholder="Nhập password mới (nếu muốn đổi)">
+
+                            <input name="phone" class="form-control mb-2" value="{{ $user->phone }}"
+                                placeholder="Phone">
+
+                            <input name="address" class="form-control mb-2" value="{{ $user->address }}"
+                                placeholder="Address">
+
+                            <button class="btn btn-primary">Cập nhật</button>
                         </form>
                     </div>
                 </div>
