@@ -4,9 +4,38 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // dinh hanh
+    // Hiển thị form đăng nhập
+    public function login()
+    {
+        return view('crud_user.login'); // file login.blade.php
+    }
+
+    // Xử lý đăng nhập
+    public function authUser(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Đăng nhập thành công
+            return redirect()->intended('/users')->with('success', 'Đăng nhập thành công!');
+        }
+
+        // Đăng nhập thất bại
+        return back()->withErrors([
+            'email' => 'Email hoặc mật khẩu không đúng.',
+        ])->onlyInput('email');
+    }
     //gialam
     public function index(Request $request)
     {
