@@ -28,26 +28,20 @@
                         <h4>Đăng ký</h4>
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Nhập username">
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Nhập mật khẩu">
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Nhập lại mật khẩu</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Nhập mật khẩu">
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <a href="#">Đã có tài khoản?</a>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+                        <form action="{{ route('users.store') }}" method="POST">
+                            @csrf
+
+                            <input name="name" class="form-control mb-2" placeholder="Tên">
+
+                            <input name="email" class="form-control mb-2" placeholder="Email">
+
+                            <input type="password" name="password" class="form-control mb-2" placeholder="Password">
+
+                            <input name="phone" class="form-control mb-2" placeholder="Phone">
+
+                            <input name="address" class="form-control mb-2" placeholder="Address">
+
+                            <button class="btn btn-success">Thêm User</button>
                         </form>
                     </div>
                 </div>
