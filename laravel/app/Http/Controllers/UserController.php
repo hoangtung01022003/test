@@ -84,7 +84,9 @@ class UserController extends Controller
         ]);
 
         $data = $request->all();
-      $data['password'] = $request->password;
+        // sử lý mã hóa password
+        //$data['password'] = bcrypt($request->password);
+        $data['password'] = bcrypt($request->password);
 
         User::create($data);
 
