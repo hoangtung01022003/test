@@ -36,6 +36,15 @@ class UserController extends Controller
             'email' => 'Email hoặc mật khẩu không đúng.',
         ])->onlyInput('email');
     }
+    //logout
+    public function logout(Request $request)
+    {
+        Auth::logout();           // Xóa thông tin đăng nhập
+        $request->session()->invalidate();    // Hủy toàn bộ session
+        $request->session()->regenerateToken(); // Tạo CSRF token mới
+
+        return redirect()->route('login')->with('success', 'Đã đăng xuất.');
+    }
     //gialam
     public function index(Request $request)
     {

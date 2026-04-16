@@ -13,8 +13,19 @@
       <a class="navbar-brand" href="#">Laravel Nhóm H</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="#">Đăng nhập</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
+          <!-- Phùng Đình Hạnh -->
+          @auth
+            <li class="nav-item">
+              <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn btn-link nav-link"
+                  style="display: inline; padding: 0; border: none; background: none;">Đăng xuất</button>
+              </form>
+            </li>
+          @else
+            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Đăng nhập</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Đăng ký</a></li>
+          @endauth
         </ul>
       </div>
     </div>
