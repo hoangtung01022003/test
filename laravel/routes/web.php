@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 
-
 //gialam-feature/user-crud
 
 // LIST
@@ -34,6 +33,6 @@ Route::get('/', function () {
 // Điều hướng login
 Route::get('login', [UserController::class, 'login'])->name('login');
 
-// Xử lý login và logout (Giữ lại code dùng AuthController)
+// Xử lý login và logout
 Route::post('login', [AuthController::class, 'login'])->name('user.authUser');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
