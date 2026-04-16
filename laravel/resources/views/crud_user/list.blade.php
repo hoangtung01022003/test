@@ -13,7 +13,6 @@
             <a class="navbar-brand" href="#">Laravel Nhóm H</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Phùng Đình Hạnh -->
                     @auth
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
