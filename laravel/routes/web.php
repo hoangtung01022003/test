@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 
 
 
+
 //gialam-feature/user-crud
 
 // LIST
@@ -14,6 +15,7 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 // CREATE (ĐẶT TRÊN)
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
+
 
 // EDIT
 Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
@@ -30,3 +32,7 @@ Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->name('u
 Route::get('/', function () {
     return view('welcome');
 });
+// Điều hướng login
+Route::get('login', [UserController::class, 'login'])->name('login');
+Route::post('login', [UserController::class, 'authUser'])->name('user.authUser');
+
