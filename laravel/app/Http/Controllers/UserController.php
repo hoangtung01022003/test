@@ -84,6 +84,7 @@ class UserController extends Controller
         ]);
 
         $data = $request->all();
+        
         // sử lý mã hóa password
         //$data['password'] = bcrypt($request->password);
         $data['password'] = bcrypt($request->password);
@@ -113,7 +114,7 @@ class UserController extends Controller
         $data = $request->all();
 
         if (!empty($request->password)) {
-            $data['password'] = bcrypt($request->password);
+             $data['password'] = $request->password;
         } else {
             unset($data['password']);
         }
