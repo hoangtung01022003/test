@@ -19,7 +19,7 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => $request->password // KHÔNG có bcrypt
         ]);
 
         return redirect()->back()->with('success', 'Đăng ký thành công');
