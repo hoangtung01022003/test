@@ -13,7 +13,6 @@
             <a class="navbar-brand" href="#">Laravel Nhóm H</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Dinh Hanh -->
                     @auth
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
@@ -24,7 +23,7 @@
                         </li>
                     @else
                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Đăng nhập</a></li>
-                        
+                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Đăng ký</a></li>
                     @endauth
                 </ul>
             </div>
