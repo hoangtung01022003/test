@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 
-
-
-
 //gialam-feature/user-crud
 
 // LIST
@@ -32,9 +29,10 @@ Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->name('u
 Route::get('/', function () {
     return view('welcome');
 });
+
 // Điều hướng login
 Route::get('login', [UserController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'login'])->name('user.authUser');
-// logout
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
+// Xử lý login và logout
+Route::post('login', [AuthController::class, 'login'])->name('user.authUser');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
